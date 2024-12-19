@@ -1,4 +1,9 @@
-import { authors, books, publishers, chapters } from "../config/mongoCollections.js";
+import {
+    authors,
+    books,
+    publishers,
+    chapters
+} from "../config/mongoCollections.js";
 import { closeConnection } from "../config/mongoConnection.js";
 import { ObjectId } from "mongodb";
 
@@ -48,7 +53,6 @@ const sampleAuthor1 = {
     books: [book1Id, book2Id]
 };
 
-
 const author2Id = new ObjectId();
 
 const book3Id = new ObjectId();
@@ -83,7 +87,6 @@ const samplePublisher1 = {
     location: "New Donk City",
     books: [book1Id, book2Id, book3Id]
 };
-
 
 const author3Id = new ObjectId();
 const publisher2Id = new ObjectId();
@@ -129,6 +132,11 @@ const chapterCol = await chapters();
 await authorCol.insertMany([sampleAuthor1, sampleAuthor2, sampleAuthor3]);
 await bookCol.insertMany([sampleBook1, sampleBook2, sampleBook3, sampleBook4]);
 await publisherCol.insertMany([samplePublisher1, samplePublisher2]);
-await chapterCol.insertMany([sampleChap1, sampleChap2, sampleChap3, sampleChap4]);
+await chapterCol.insertMany([
+    sampleChap1,
+    sampleChap2,
+    sampleChap3,
+    sampleChap4
+]);
 
 await closeConnection();

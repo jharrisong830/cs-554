@@ -20,7 +20,10 @@ export default function Publisher() {
     const [currId, setCurrId] = useState(null);
     const [currName, setCurrName] = useState(null);
 
-    const [submissionStatus, setSubmissionStatus] = useState({ status: "cancel", msg: "" });
+    const [submissionStatus, setSubmissionStatus] = useState({
+        status: "cancel",
+        msg: ""
+    });
     // status is string in ["cancel", "success", "error"]
     // "cancel" -> no submission currently, don't show alert
     // "success" -> submission successful, show confirmation
@@ -33,77 +36,104 @@ export default function Publisher() {
 
     return (
         <div>
-            {loading ? <p>Loading</p> : (
-                error ? <p>Oops! There was an error loading the data. {JSON.stringify(error)}</p> : (
-                    <div>
-                        <h1>{data.getPublisherById.name}</h1>
-                        <Table>
-                            <thead>
-                                <tr>
-                                    <th>field</th>
-                                    <th>value</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>name</th>
-                                    <td>{data.getPublisherById.name}</td>
-                                </tr>
-                                <tr>
-                                    <th>established year</th>
-                                    <td>{data.getPublisherById.establishedYear}</td>
-                                </tr>
-                                <tr>
-                                    <th>location</th>
-                                    <td>{data.getPublisherById.location}</td>
-                                </tr>
-                                <tr>
-                                    <th>total books</th>
-                                    <td>{data.getPublisherById.numOfBooks}</td>
-                                </tr>
-                                <tr>
-                                    <th>books</th>
-                                    <td>{data.getPublisherById.books.map((book, ind) => <Link key={ind} to={`/books/${book._id}`}><p>{book.title}</p></Link>)}</td>
-                                </tr>
-                            </tbody>
-                        </Table>
+            {loading ? (
+                <p>Loading</p>
+            ) : error ? (
+                <p>
+                    Oops! There was an error loading the data.{" "}
+                    {JSON.stringify(error)}
+                </p>
+            ) : (
+                <div>
+                    <h1>{data.getPublisherById.name}</h1>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>field</th>
+                                <th>value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>name</th>
+                                <td>{data.getPublisherById.name}</td>
+                            </tr>
+                            <tr>
+                                <th>established year</th>
+                                <td>{data.getPublisherById.establishedYear}</td>
+                            </tr>
+                            <tr>
+                                <th>location</th>
+                                <td>{data.getPublisherById.location}</td>
+                            </tr>
+                            <tr>
+                                <th>total books</th>
+                                <td>{data.getPublisherById.numOfBooks}</td>
+                            </tr>
+                            <tr>
+                                <th>books</th>
+                                <td>
+                                    {data.getPublisherById.books.map(
+                                        (book, ind) => (
+                                            <Link
+                                                key={ind}
+                                                to={`/books/${book._id}`}
+                                            >
+                                                <p>{book.title}</p>
+                                            </Link>
+                                        )
+                                    )}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </Table>
 
-                        <Button variant="primary" onClick={() => handleOpenModal(id, setIsShowingEditModal)}>Edit</Button>
-                        <Button variant="danger" onClick={() => { // to keep it simple, we'll set the title here (instead of making a separate open modal func for the remove modal)
+                    <Button
+                        variant="primary"
+                        onClick={() =>
+                            handleOpenModal(id, setIsShowingEditModal)
+                        }
+                    >
+                        Edit
+                    </Button>
+                    <Button
+                        variant="danger"
+                        onClick={() => {
+                            // to keep it simple, we'll set the title here (instead of making a separate open modal func for the remove modal)
                             setCurrName(data.getPublisherById.name);
                             handleOpenModal(id, setIsShowingRemoveModal);
-                        }}>Remove</Button>
-
-                        
-                    </div>
-                )
+                        }}
+                    >
+                        Remove
+                    </Button>
+                </div>
             )}
 
-                <EditModal 
-                    isShowing={isShowingEditModal} 
-                    setIsShowing={setIsShowingEditModal} 
-                    setSubmissionStatus={setSubmissionStatus} 
-                    type="publishers"
-                    dataId={currId} 
-                    setDataId={setCurrId} 
-                />
+            <EditModal
+                isShowing={isShowingEditModal}
+                setIsShowing={setIsShowingEditModal}
+                setSubmissionStatus={setSubmissionStatus}
+                type="publishers"
+                dataId={currId}
+                setDataId={setCurrId}
+            />
 
-                <RemoveModal
-                    isShowing={isShowingRemoveModal}
-                    setIsShowing={setIsShowingRemoveModal}
-                    setSubmissionStatus={setSubmissionStatus}
-                    type="publishers"
-                    dataId={currId}
-                    setDataId={setCurrId}
-                    dataName={currName}
-                    setDataName={setCurrName}
-                    mutation={REMOVE_PUBLISHER}
-                />
+            <RemoveModal
+                isShowing={isShowingRemoveModal}
+                setIsShowing={setIsShowingRemoveModal}
+                setSubmissionStatus={setSubmissionStatus}
+                type="publishers"
+                dataId={currId}
+                setDataId={setCurrId}
+                dataName={currName}
+                setDataName={setCurrName}
+                mutation={REMOVE_PUBLISHER}
+            />
 
-                <SubmissionAlert 
-                    submissionStatus={submissionStatus} 
-                    setSubmissionStatus={setSubmissionStatus} 
-                />
+            <SubmissionAlert
+                submissionStatus={submissionStatus}
+                setSubmissionStatus={setSubmissionStatus}
+            />
         </div>
     );
 }

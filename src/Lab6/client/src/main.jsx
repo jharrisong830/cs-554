@@ -21,7 +21,6 @@ import {
 } from "@apollo/client";
 import { Route, Routes, BrowserRouter, Link } from "react-router-dom";
 
-
 const client = new ApolloClient({
     cache: new InMemoryCache(),
     link: new HttpLink({
@@ -36,9 +35,33 @@ createRoot(document.getElementById("root")).render(
                 <Routes>
                     <Route path="/" element={<App />} />
 
-                    <Route path="/authors" element={<DataList type="authors" query={resolvers.GET_AUTHORS_LIST} />} />
-                    <Route path="/books" element={<DataList type="books" query={resolvers.GET_BOOKS_LIST} />} />
-                    <Route path="/publishers" element={<DataList type="publishers" query={resolvers.GET_PUBLISHERS_LIST} />} />
+                    <Route
+                        path="/authors"
+                        element={
+                            <DataList
+                                type="authors"
+                                query={resolvers.GET_AUTHORS_LIST}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/books"
+                        element={
+                            <DataList
+                                type="books"
+                                query={resolvers.GET_BOOKS_LIST}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/publishers"
+                        element={
+                            <DataList
+                                type="publishers"
+                                query={resolvers.GET_PUBLISHERS_LIST}
+                            />
+                        }
+                    />
 
                     <Route path="/books/:id" element={<Book />} />
                     <Route path="/authors/:id" element={<Author />} />

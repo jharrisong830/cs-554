@@ -6,22 +6,26 @@ import { returnValidData } from "../helpers.js";
  * @throws on api error
  */
 const getAllPokemon = async () => {
-    const data = await returnValidData("https://pokeapi.co/api/v2/pokemon/?limit=100000&offset=0"); // get all pokemon (throws error if unable to fetch)
+    const data = await returnValidData(
+        "https://pokeapi.co/api/v2/pokemon/?limit=100000&offset=0"
+    ); // get all pokemon (throws error if unable to fetch)
     if (!Object.keys(data).includes("results")) {
-        throw "ERROR: unable to get results array"
+        throw "ERROR: unable to get results array";
     }
     return data.results;
 };
 
 /**
  * returns data for pokemon specified by id
- * @param {number} id 
- * 
+ * @param {number} id
+ *
  * @returns {object}
  * @throws on invalid input or api error
  */
 const getPokemon = async (id) => {
-    const data = await returnValidData(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    const data = await returnValidData(
+        `https://pokeapi.co/api/v2/pokemon/${id}`
+    );
     return data;
 };
 
@@ -31,17 +35,19 @@ const getPokemon = async (id) => {
  * @throws on api error
  */
 const getAllMoves = async () => {
-    const data = await returnValidData("https://pokeapi.co/api/v2/move?limit=100000&offset=0");
+    const data = await returnValidData(
+        "https://pokeapi.co/api/v2/move?limit=100000&offset=0"
+    );
     if (!Object.keys(data).includes("results")) {
-        throw "ERROR: unable to get results array"
+        throw "ERROR: unable to get results array";
     }
     return data.results;
 };
 
 /**
  * returns data for move specified by id
- * @param {number} id 
- * 
+ * @param {number} id
+ *
  * @returns {object}
  * @throws on invalid input or api error
  */
@@ -56,17 +62,19 @@ const getMove = async (id) => {
  * @throws on api error
  */
 const getAllItems = async () => {
-    const data = await returnValidData("https://pokeapi.co/api/v2/item?limit=100000&offset=0");
+    const data = await returnValidData(
+        "https://pokeapi.co/api/v2/item?limit=100000&offset=0"
+    );
     if (!Object.keys(data).includes("results")) {
-        throw "ERROR: unable to get results array"
+        throw "ERROR: unable to get results array";
     }
     return data.results;
 };
 
 /**
  * returns data for item specified by id
- * @param {number} id 
- * 
+ * @param {number} id
+ *
  * @returns {object}
  * @throws on invalid input or api error
  */
@@ -74,8 +82,6 @@ const getItem = async (id) => {
     const data = await returnValidData(`https://pokeapi.co/api/v2/item/${id}`);
     return data;
 };
-
-
 
 const exportedMethods = {
     getAllPokemon,

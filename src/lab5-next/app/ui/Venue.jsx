@@ -21,7 +21,7 @@ export default function Venue({ id }) {
                 <div>
                     <h1 className="p-2">{data.name}</h1>
                     <h3 className="p-2">{data.type}</h3>
-                    <h3 className="p-2"> 
+                    <h3 className="p-2">
                         {data.upcomingEvents._total} upcoming event
                         {data.upcomingEvents._total === 1 ? "" : "s"}
                     </h3>

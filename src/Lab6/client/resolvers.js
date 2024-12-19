@@ -81,7 +81,6 @@ export const GET_PUBLISHER_BY_ID = gql`
     }
 `;
 
-
 export const BOOKS_BY_GENRE = gql`
     query ($genre: Genre!) {
         booksByGenre(genre: $genre) {
@@ -122,22 +121,21 @@ export const SEARCH_BOOK_BY_TITLE = gql`
 
 export const EDIT_BOOK = gql`
     mutation (
-        $id: String!, 
-        $title: String, 
-        $publicationDate: String, 
-        $genre: Genre, 
-        $chapters: [String!], 
-        $authorId: String, 
+        $id: String!
+        $title: String
+        $publicationDate: String
+        $genre: Genre
+        $chapters: [String!]
+        $authorId: String
         $publisherId: String
     ) {
         editBook(
-            _id: $id, 
-            title: $title, 
-            publicationDate: 
-            $publicationDate, 
-            genre: $genre, 
-            chapters: $chapters, 
-            authorId: $authorId, 
+            _id: $id
+            title: $title
+            publicationDate: $publicationDate
+            genre: $genre
+            chapters: $chapters
+            authorId: $authorId
             publisherId: $publisherId
         ) {
             _id
@@ -146,16 +144,11 @@ export const EDIT_BOOK = gql`
 `;
 
 export const EDIT_AUTHOR = gql`
-    mutation (
-        $id: String!, 
-        $name: String, 
-        $bio: String,
-        $dateOfBirth: String
-    ) {
+    mutation ($id: String!, $name: String, $bio: String, $dateOfBirth: String) {
         editAuthor(
-            _id: $id, 
-            name: $name, 
-            bio: $bio,
+            _id: $id
+            name: $name
+            bio: $bio
             dateOfBirth: $dateOfBirth
         ) {
             _id
@@ -165,22 +158,21 @@ export const EDIT_AUTHOR = gql`
 
 export const EDIT_PUBLISHER = gql`
     mutation (
-        $id: String!, 
-        $name: String, 
+        $id: String!
+        $name: String
         $establishedYear: Int
         $location: String
     ) {
         editPublisher(
-            _id: $id, 
-            name: $name, 
-            establishedYear: $establishedYear,
+            _id: $id
+            name: $name
+            establishedYear: $establishedYear
             location: $location
         ) {
             _id
         }
     }
 `;
-
 
 export const REMOVE_BOOK = gql`
     mutation ($id: String!) {
@@ -208,19 +200,19 @@ export const REMOVE_PUBLISHER = gql`
 
 export const ADD_BOOK = gql`
     mutation (
-        $title: String!, 
-        $publicationDate: String!, 
-        $genre: Genre!, 
-        $chapters: [String!]!, 
-        $authorId: String!, 
+        $title: String!
+        $publicationDate: String!
+        $genre: Genre!
+        $chapters: [String!]!
+        $authorId: String!
         $publisherId: String!
     ) {
         addBook(
-            title: $title, 
-            publicationDate: $publicationDate, 
-            genre: $genre, 
-            chapters: $chapters, 
-            authorId: $authorId, 
+            title: $title
+            publicationDate: $publicationDate
+            genre: $genre
+            chapters: $chapters
+            authorId: $authorId
             publisherId: $publisherId
         ) {
             _id
@@ -238,7 +230,11 @@ export const ADD_AUTHOR = gql`
 
 export const ADD_PUBLISHER = gql`
     mutation ($name: String!, $establishedYear: Int!, $location: String!) {
-        addPublisher(name: $name, establishedYear: $establishedYear, location: $location) {
+        addPublisher(
+            name: $name
+            establishedYear: $establishedYear
+            location: $location
+        ) {
             _id
         }
     }

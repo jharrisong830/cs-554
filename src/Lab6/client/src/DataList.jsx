@@ -22,7 +22,10 @@ export default function DataList({ type, query }) {
     const [currId, setCurrId] = useState(null);
     const [currName, setCurrName] = useState(null);
 
-    const [submissionStatus, setSubmissionStatus] = useState({ status: "cancel", msg: "" });
+    const [submissionStatus, setSubmissionStatus] = useState({
+        status: "cancel",
+        msg: ""
+    });
     // status is string in ["cancel", "success", "error"]
     // "cancel" -> no submission currently, don't show alert
     // "success" -> submission successful, show confirmation
@@ -40,11 +43,29 @@ export default function DataList({ type, query }) {
     const getAddModal = () => {
         switch (type) {
             case "books":
-                return <AddBookModal isShowing={isShowingAddModal} setIsShowing={setIsShowingAddModal} setSubmissionStatus={setSubmissionStatus}/>
+                return (
+                    <AddBookModal
+                        isShowing={isShowingAddModal}
+                        setIsShowing={setIsShowingAddModal}
+                        setSubmissionStatus={setSubmissionStatus}
+                    />
+                );
             case "authors":
-                return <AddAuthorModal isShowing={isShowingAddModal} setIsShowing={setIsShowingAddModal} setSubmissionStatus={setSubmissionStatus} />
+                return (
+                    <AddAuthorModal
+                        isShowing={isShowingAddModal}
+                        setIsShowing={setIsShowingAddModal}
+                        setSubmissionStatus={setSubmissionStatus}
+                    />
+                );
             case "publishers":
-                return <AddPublisherModal isShowing={isShowingAddModal} setIsShowing={setIsShowingAddModal} setSubmissionStatus={setSubmissionStatus} />
+                return (
+                    <AddPublisherModal
+                        isShowing={isShowingAddModal}
+                        setIsShowing={setIsShowingAddModal}
+                        setSubmissionStatus={setSubmissionStatus}
+                    />
+                );
         }
     };
 
@@ -62,44 +83,80 @@ export default function DataList({ type, query }) {
     return (
         <div>
             <h1>{type}</h1>
-            {loading ? <p>Loading...</p> : (
-                error ? <p>Oops! There was an error loading the data. {JSON.stringify(error)}</p> : (
-                    <div>
-                        <Table>
-                            <thead>
-                                <tr>
-                                    <th>item</th>
-                                    <th>options</th>
+            {loading ? (
+                <p>Loading...</p>
+            ) : error ? (
+                <p>
+                    Oops! There was an error loading the data.{" "}
+                    {JSON.stringify(error)}
+                </p>
+            ) : (
+                <div>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>item</th>
+                                <th>options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data[type].map((elem) => (
+                                <tr key={elem._id}>
+                                    <td>
+                                        <Link to={`/${type}/${elem._id}`}>
+                                            {type === "books"
+                                                ? elem.title
+                                                : elem.name}
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Button
+                                            variant="primary"
+                                            onClick={() =>
+                                                handleOpenModal(
+                                                    elem._id,
+                                                    setIsShowingEditModal
+                                                )
+                                            }
+                                        >
+                                            Edit
+                                        </Button>
+                                        <Button
+                                            variant="danger"
+                                            onClick={() => {
+                                                // to keep it simple, we'll set the name here (instead of making a separate open modal func for the remove modal)
+                                                setCurrName(
+                                                    type === "books"
+                                                        ? elem.title
+                                                        : elem.name
+                                                );
+                                                handleOpenModal(
+                                                    elem._id,
+                                                    setIsShowingRemoveModal
+                                                );
+                                            }}
+                                        >
+                                            Remove
+                                        </Button>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {data[type].map((elem) => 
-                                    <tr key={elem._id}>
-                                        <td><Link to={`/${type}/${elem._id}`}>{type === "books" ? elem.title : elem.name}</Link></td>
-                                        <td>
-                                            <Button variant="primary" onClick={() => handleOpenModal(elem._id, setIsShowingEditModal)}>Edit</Button>
-                                            <Button variant="danger" onClick={() => { // to keep it simple, we'll set the name here (instead of making a separate open modal func for the remove modal)
-                                                setCurrName(type === "books" ? elem.title : elem.name);
-                                                handleOpenModal(elem._id, setIsShowingRemoveModal);
-                                            }}>Remove</Button>
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </Table>
+                            ))}
+                        </tbody>
+                    </Table>
 
-                        <Button variant="success" onClick={handleOpenAddModal}>add to {type}</Button>
-                    </div>
-                )
+                    <Button variant="success" onClick={handleOpenAddModal}>
+                        add to {type}
+                    </Button>
+                </div>
             )}
 
-            <EditModal 
-                isShowing={isShowingEditModal} 
-                setIsShowing={setIsShowingEditModal} 
-                setSubmissionStatus={setSubmissionStatus} 
-                type={type} 
-                dataId={currId} 
-                setDataId={setCurrId} 
+            <EditModal
+                isShowing={isShowingEditModal}
+                setIsShowing={setIsShowingEditModal}
+                setSubmissionStatus={setSubmissionStatus}
+                type={type}
+                dataId={currId}
+                setDataId={setCurrId}
             />
 
             <RemoveModal
@@ -114,11 +171,13 @@ export default function DataList({ type, query }) {
                 mutation={getRemoveMutation()}
             />
 
-            {getAddModal() /* gets the add modal based on whatever type we're viewing */}
+            {
+                getAddModal() /* gets the add modal based on whatever type we're viewing */
+            }
 
-            <SubmissionAlert 
-                submissionStatus={submissionStatus} 
-                setSubmissionStatus={setSubmissionStatus} 
+            <SubmissionAlert
+                submissionStatus={submissionStatus}
+                setSubmissionStatus={setSubmissionStatus}
             />
         </div>
     );

@@ -2,8 +2,7 @@ import pokeRoutes from "./pokemon.js";
 import moveRoutes from "./moves.js";
 import itemRoutes from "./items.js";
 
-
-const routesConfig = (app) => {    
+const routesConfig = (app) => {
     app.use("/api/pokemon", pokeRoutes);
     app.use("/api/move", moveRoutes);
     app.use("/api/item", itemRoutes);

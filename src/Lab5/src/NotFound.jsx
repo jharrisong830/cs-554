@@ -7,7 +7,9 @@ function NotFound() {
             <h3>The requested page couldn't be found or doesn't exist.</h3>
 
             <div>
-                <Link to="/" className="button-wrapper">Back to Home</Link>
+                <Link to="/" className="button-wrapper">
+                    Back to Home
+                </Link>
             </div>
         </div>
     );

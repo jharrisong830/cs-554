@@ -15,11 +15,10 @@ export const returnValidString = (str) => {
     return str; // return the string if it passes validation
 };
 
-
 /**
  * wrapper function for axios get requests. does the request, validates that the data is defined, and then returns the data
- * @param {string} reqUrl 
- * 
+ * @param {string} reqUrl
+ *
  * @returns {object}
  * @throws on invalid input or error from the requested server
  */
@@ -34,7 +33,7 @@ export const returnValidData = async (reqUrl) => {
 /**
  * validates the response from a redis operation (typically "OK" on success)
  * @param {*} res response from a redis operation
- * 
+ *
  * @throws if response is not "OK"
  */
 export const validateRedisResponse = (res) => {
@@ -45,11 +44,11 @@ export const validateRedisResponse = (res) => {
 
 /**
  * validates the response from a redis list operation (length of list on success)
- * @param {*} res 
- * 
+ * @param {*} res
+ *
  * @throws if response is not a valid list length
  */
-export const validateRedisListResponse = res => {
+export const validateRedisListResponse = (res) => {
     if (typeof res !== "number" || res < 0) {
         throw "ERROR: invalid redis list response";
     }
@@ -57,15 +56,20 @@ export const validateRedisListResponse = res => {
 
 /**
  * converts the provided string to a number
- * @param {string} str 
- * 
+ * @param {string} str
+ *
  * @returns {number}
  * @throws if conversion fails
  */
 export const returnValidInt = (str) => {
     str = returnValidString(str);
     const result = parseInt(str);
-    if (result === null || result === undefined || typeof result !== "number" || isNaN(result)) {
+    if (
+        result === null ||
+        result === undefined ||
+        typeof result !== "number" ||
+        isNaN(result)
+    ) {
         throw "ERROR: could not parse to int";
     }
     return result;

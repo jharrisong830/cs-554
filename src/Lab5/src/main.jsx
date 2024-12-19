@@ -16,11 +16,20 @@ createRoot(document.getElementById("root")).render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App />} />
-                <Route path="/events/page/:page" element={<Page type="events" />} />
+                <Route
+                    path="/events/page/:page"
+                    element={<Page type="events" />}
+                />
                 <Route path="/events/:id" element={<Event />} />
-                <Route path="/attractions/page/:page" element={<Page type="attractions" />} />
+                <Route
+                    path="/attractions/page/:page"
+                    element={<Page type="attractions" />}
+                />
                 <Route path="/attractions/:id" element={<Attraction />} />
-                <Route path="/venues/page/:page" element={<Page type="venues" />} />
+                <Route
+                    path="/venues/page/:page"
+                    element={<Page type="venues" />}
+                />
                 <Route path="/venues/:id" element={<Venue />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>

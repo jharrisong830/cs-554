@@ -11,8 +11,9 @@ export default function SearchBar({ type }) {
         e.preventDefault();
         setIsShowingResults(false);
         const searchTextCurrent = searchBox.current.value.trim();
-        if (searchTextCurrent.length === 0) { /* TODO */ }
-        else {
+        if (searchTextCurrent.length === 0) {
+            /* TODO */
+        } else {
             setSearchText(searchTextCurrent);
             setIsShowingResults(true);
         }
@@ -22,11 +23,21 @@ export default function SearchBar({ type }) {
         <div>
             <Form onSubmit={(e) => handleSearch(e)}>
                 <InputGroup>
-                    <FormControl ref={searchBox} placeholder={`Search for ${type}`} />
+                    <FormControl
+                        ref={searchBox}
+                        placeholder={`Search for ${type}`}
+                    />
                     <Button type="submit">Search</Button>
                 </InputGroup>
             </Form>
-            {isShowingResults && <SearchResults type={type} searchTerm={searchText} setIsShowingResults={setIsShowingResults} />} {/* pass the setter to allow this component to clear the results */}
+            {isShowingResults && (
+                <SearchResults
+                    type={type}
+                    searchTerm={searchText}
+                    setIsShowingResults={setIsShowingResults}
+                />
+            )}{" "}
+            {/* pass the setter to allow this component to clear the results */}
         </div>
     );
 }

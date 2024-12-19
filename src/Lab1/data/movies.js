@@ -156,10 +156,7 @@ const putMovie = async (movieId, updateObject) => {
         { _id: movieId },
         { $set: newMovie }
     );
-    if (
-        !updateInfo ||
-        updateInfo.matchedCount === 0
-    )
+    if (!updateInfo || updateInfo.matchedCount === 0)
         throw "ERROR: unable to update movie";
     return await getMovie(movieId.toString()); // return the newly updated movie!
 };
@@ -201,10 +198,7 @@ const patchMovie = async (movieId, updateObject) => {
         { _id: movieId },
         { $set: newMovie }
     );
-    if (
-        !updateInfo ||
-        updateInfo.matchedCount === 0
-    )
+    if (!updateInfo || updateInfo.matchedCount === 0)
         throw "ERROR: unable to update movie";
     return await getMovie(movieId.toString()); // return the newly updated movie!
 };

@@ -13,12 +13,10 @@ router
             let n = options.take ? parseInt(options.take) : 20; // default: 20
             let offset = options.skip ? parseInt(options.skip) : 0; // default: 0
             if (isNaN(n) || isNaN(offset)) {
-                return res
-                    .status(400)
-                    .json({
-                        error: "cloudn't get movies",
-                        msg: "ERROR: couldn't parse options to int"
-                    });
+                return res.status(400).json({
+                    error: "cloudn't get movies",
+                    msg: "ERROR: couldn't parse options to int"
+                });
             }
             const results = await movieData.getN(n, offset);
             return res.json(results);
@@ -41,12 +39,10 @@ router
                 newMovieData.rating
             );
         } catch (e) {
-            return res
-                .status(400)
-                .json({
-                    error: "couldn't create movie",
-                    msg: JSON.stringify(e)
-                });
+            return res.status(400).json({
+                error: "couldn't create movie",
+                msg: JSON.stringify(e)
+            });
         }
         try {
             const insertedMovie = await movieData.createMovie(
@@ -73,12 +69,10 @@ router
             const result = await movieData.getMovie(req.params.id); // get requested movie (this function will validate movie id and throw if its invalid/not found)
             return res.json(result);
         } catch (e) {
-            return res
-                .status(404)
-                .json({
-                    error: "couldn't find movie movie",
-                    msg: JSON.stringify(e)
-                });
+            return res.status(404).json({
+                error: "couldn't find movie movie",
+                msg: JSON.stringify(e)
+            });
         }
     })
     .put(async (req, res) => {
@@ -94,12 +88,10 @@ router
                 updateMovieData.rating
             );
         } catch (e) {
-            return res
-                .status(400)
-                .json({
-                    error: "couldn't update movie",
-                    msg: JSON.stringify(e)
-                });
+            return res.status(400).json({
+                error: "couldn't update movie",
+                msg: JSON.stringify(e)
+            });
         }
         try {
             const result = await movieData.putMovie(
@@ -145,12 +137,10 @@ router
                     updateMovieData.rating
                 );
         } catch (e) {
-            return res
-                .status(400)
-                .json({
-                    error: "couldn't update movie",
-                    msg: JSON.stringify(e)
-                });
+            return res.status(400).json({
+                error: "couldn't update movie",
+                msg: JSON.stringify(e)
+            });
         }
         try {
             const result = await movieData.patchMovie(

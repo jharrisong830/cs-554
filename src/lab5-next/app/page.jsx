@@ -14,15 +14,27 @@ export default function Home() {
             </p>
 
             <div>
-                <Button as={Link} href="/events/page/1" className="button-wrapper mx-2">
+                <Button
+                    as={Link}
+                    href="/events/page/1"
+                    className="button-wrapper mx-2"
+                >
                     View Events
                 </Button>
 
-                <Button as={Link} href="/attractions/page/1" className="button-wrapper mx-2">
+                <Button
+                    as={Link}
+                    href="/attractions/page/1"
+                    className="button-wrapper mx-2"
+                >
                     View Attractions
                 </Button>
 
-                <Button as={Link} href="/venues/page/1" className="button-wrapper mx-2">
+                <Button
+                    as={Link}
+                    href="/venues/page/1"
+                    className="button-wrapper mx-2"
+                >
                     View Venues
                 </Button>
             </div>
