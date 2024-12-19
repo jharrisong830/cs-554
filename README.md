@@ -1,5 +1,5 @@
-# <courseCode> - <courseName>
-Code for projects from <courseCode> at Stevens Institute of Technology (<term>).
+# CS 554 - Web Programming II
+Code for projects from CS 554 at Stevens Institute of Technology (Fall 2024).
 
 The materials in this repository are being published to showcase my skills and effort through code that has been authored by myself. I have, to the best of my ability, removed materials that I have not created (including, but not limited to: assignment write-ups, lecture slides, exams).
 
