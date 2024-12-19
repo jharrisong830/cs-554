@@ -1,0 +1,22 @@
+{
+    "name": "graham-john-cs554-lab3",
+    "version": "1.0.0",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+        "start": "node ./server.js",
+        "seed": "node ./tasks/seed.js",
+        "drop": "node ./tasks/drop.js",
+        "clear-cache": "redis-cli flushall"
+    },
+    "keywords": [],
+    "author": "John Graham 20006581",
+    "license": "MIT",
+    "description": "I pledge my honor that I have abided by the Stevens Honor System.",
+    "dependencies": {
+        "@apollo/server": "^4.11.0",
+        "graphql": "^16.9.0",
+        "mongodb": "^6.9.0",
+        "redis": "^4.7.0"
+    }
+}
